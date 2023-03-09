@@ -2,16 +2,18 @@ import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Pressable } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const HomeScreen = () => {
+import { ScreenType } from '../constants/constants';
+
+const HomeScreen = ( {onExit} ) => {
 	return (
 		<View style={styles.container}>
-			<Pressable>
+			<Pressable onPress={ () => onExit(ScreenType.addNote) }>
 				<View style={styles.itemButton}>
 					<Text style={styles.title}>ADD NEW NOTE</Text>
 					<Icon style={styles.icon} name="arrow-forward-outline"/>
 				</View>
 			</Pressable>
-			<Pressable>
+			<Pressable onPress={ () => onExit(ScreenType.allNotes) }>
 				<View style={styles.itemButton}>
 					<Text style={styles.title}>VIEW ALL NOTES</Text>
 					<Icon style={styles.icon} name="arrow-forward-outline"/>
