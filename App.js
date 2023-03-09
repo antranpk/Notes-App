@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Header from './components/Header';
+import BackButton from './components/BackButton';
 import HomeScreen from './screens/HomeScreen';
 import AddNoteScreen from './screens/AddNoteScreen';
 import AllNotesScreen from './screens/AllNotesScreen';
@@ -11,6 +12,7 @@ import { ScreenType } from './constants/constants';
 export default function App() {
   const [screen, setScreen] = useState(ScreenType.home);
   let content;
+
   if (screen === ScreenType.addNote) {
     content = <AddNoteScreen />;
   } else if (screen === ScreenType.allNotes) {
@@ -29,6 +31,7 @@ export default function App() {
     <View style={styles.container}>
       <Header />
       <StatusBar style="auto" />
+      <BackButton onClickButton={(data) => setScreen(data)} />
       {content}
     </View>
   );
