@@ -38,7 +38,9 @@ export default function App() {
     <View style={styles.container}>
       <Header />
       <StatusBar style="auto" />
-      <BackButton onClickButton={updateScreen} />
+      {screen !== ScreenType.home && (
+        <BackButton onClickButton={updateScreen} />
+      )}
       {content}
     </View>
   );
