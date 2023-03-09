@@ -1,14 +1,51 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 
-const AddNoteScreen = () => {
+
+const AddNoteScreen = ({ onSave }) => {
+	const [enteredText, setEnteredText] = useState("");
+	const handleChange = (val) => {
+		setEnteredText(val);
+	}
+	const handleClick = () => {
+		if (enteredText.trim().length > 0) {
+			onSave(enteredText);
+		}
+	}
 	return (
-		<View>
-			<Text>AddNoteScreen</Text>
+		<View style={styles.container}>
+			<View style={styles.formContainer}>
+				<Text style={styles.title}>Add note</Text>
+				<View>
+					<TextInput onChangeText={handleChange} style={styles.input} />
+				</View>
+				<Button onPress={handleClick} title="ADD" />
+			</View>
 		</View>
 	)
 }
 
 export default AddNoteScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	formContainer: {
+		backgroundColor: '#f5f5f5',
+		padding: 5,
+		marginHorizontal: 10,
+		marginVertical: 10,
+	},
+	input: {
+		marginVertical: 20,
+		width: '100%',
+		borderBottomWidth: 2,
+		fontSize: 16,
+		padding: 10
+	},
+	title: {
+		fontSize: 20,
+		fontWeight: "bold",
+	}
+});

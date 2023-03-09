@@ -11,10 +11,15 @@ import { ScreenType } from './constants/constants';
 
 export default function App() {
   const [screen, setScreen] = useState(ScreenType.home);
+  const [notes, setNotes] = useState([]);
   let content;
 
   if (screen === ScreenType.addNote) {
-    content = <AddNoteScreen />;
+    content = (
+      <AddNoteScreen
+        onSave = {(data) => setNotes([...notes, { id: Date.now(), note: data }])}
+      />
+    );
   } else if (screen === ScreenType.allNotes) {
     content = <AllNotesScreen />;
   } else if (screen === ScreenType.home){
