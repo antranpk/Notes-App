@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 
+import { ScreenType } from '../constants/constants';
 
-const AddNoteScreen = ({ onSave }) => {
+const AddNoteScreen = ({ onSave, onExit }) => {
 	const [enteredText, setEnteredText] = useState("");
 	const handleChange = (val) => {
 		setEnteredText(val);
@@ -10,6 +11,7 @@ const AddNoteScreen = ({ onSave }) => {
 	const handleClick = () => {
 		if (enteredText.trim().length > 0) {
 			onSave(enteredText);
+			onExit(ScreenType.allNotes);
 		}
 	}
 	return (

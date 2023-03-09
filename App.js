@@ -13,21 +13,23 @@ export default function App() {
   const [screen, setScreen] = useState(ScreenType.home);
   const [notes, setNotes] = useState([]);
   let content;
+  const updateScreen = (data) => {
+    setScreen(data);
+  }
 
   if (screen === ScreenType.addNote) {
     content = (
       <AddNoteScreen
+        onExit = {updateScreen}
         onSave = {(data) => setNotes([...notes, { id: Date.now(), note: data }])}
       />
     );
   } else if (screen === ScreenType.allNotes) {
-    content = <AllNotesScreen />;
+    content = <AllNotesScreen notes={notes} />;
   } else if (screen === ScreenType.home){
     content = (
       <HomeScreen
-        onExit={(data) => {
-          setScreen(data);
-        }}
+        onExit={updateScreen}
       />
     );
   }
@@ -36,7 +38,7 @@ export default function App() {
     <View style={styles.container}>
       <Header />
       <StatusBar style="auto" />
-      <BackButton onClickButton={(data) => setScreen(data)} />
+      <BackButton onClickButton={updateScreen} />
       {content}
     </View>
   );
